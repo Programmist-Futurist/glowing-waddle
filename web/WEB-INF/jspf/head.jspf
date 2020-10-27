@@ -1,0 +1,37 @@
+<script>
+    function confirmBox() {
+        if (confirm("<fmt:message key="head.js.confirm_box_text"/>")) {
+        } else {
+            return false;
+        }
+    }
+</script>
+
+<head>
+
+    <title>
+        ${title}
+    </title>
+
+    <%--	<meta charset="utf-8">--%>
+    <%--	<meta name="viewport" content="width=device-width, initial-scale=1">--%>
+    <%--===========================================================================
+    Bind CSS document.
+    ===========================================================================--%>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css">
+    <%--===========================================================================
+        Define the names Path
+        ===========================================================================--%>
+    <jsp:useBean id="contextPath" class="ua.nure.levchenko.SummaryTask4.web.path.ContextPath" scope="application"/>
+    <jsp:useBean id="sessionPath" class="ua.nure.levchenko.SummaryTask4.web.path.SessionPath" scope="session"/>
+    <jsp:useBean id="requestPath" class="ua.nure.levchenko.SummaryTask4.web.path.RequestPath" scope="request"/>
+
+
+    <%--===========================================================================
+        If you define http-equiv attribute, set the content type and the charset the same
+        as you set them in a page directive.
+        ===========================================================================--%>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>

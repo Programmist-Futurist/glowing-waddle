@@ -1,0 +1,59 @@
+<c:set var="title" value="Teacher connect"/>
+
+<div align="center">
+    <form action="/controller" id="teacher">
+        <fmt:message key="teacher_course_connection_jspf.form_text.teacher"/>
+        <select name="${requestPath.teacherId}" style="margin: 3px">
+            <c:forEach var="teacher" items="${requestScope.teachers}">
+                <option value="${teacher.get('id')}">${teacher.get('fullName')}</option>
+            </c:forEach>
+        </select>
+
+        <input type="hidden" name="${requestPath.command}" value="courseForTeacher"/>
+        <input type="hidden" name="${requestPath.action}" value="show"/>
+        <input type=submit class="btn btn-primary"
+               value="<fmt:message key="teacher_course_connection_jspf.btn.choose"/>" form="teacher"/>
+
+        <c:if test="${not empty requestScope.chosenTeacher}">
+            <c:set var="teacherNames" value="${requestScope.chosenTeacher}"/>
+            <ul class="bs-example border">
+                <%@ include file="/WEB-INF/jspf/common/show_teacher.jspf" %>
+            </ul>
+        </c:if>
+    </form>
+
+    <form action="/controller" id="confirm">
+        <c:if test="${not empty requestScope.chosenCourse && not empty requestScope.chosenTeacher}">
+            <input type="hidden" name="${requestPath.command}" value="courseForTeacher"/>
+            <input type="hidden" name="${requestPath.action}" value="connect"/>
+            <input type="hidden" name="${requestPath.teacherId}" value="${requestScope.teacherId}"/>
+            <input type="hidden" name="${requestPath.courseId}" value="${requestScope.courseId}"/>
+            <input type="submit" onclick="return confirmBox()" class="btn btn-success"
+                   value="<fmt:message key="teacher_course_connection_jspf.btn.connect"/>" form="confirm"/>
+        </c:if>
+    </form>
+
+
+    <form action="/controller" id="course">
+        <fmt:message key="teacher_course_connection_jspf.form_text.course"/>
+        <select name="${requestPath.courseId}">
+            <c:forEach var="course" items="${requestScope.courses}">
+                <option value="${course.get('id')}">${course.get('name')}</option>
+            </c:forEach>
+        </select>
+
+        <input type="hidden" name="${requestPath.command}" value="courseForTeacher"/>
+        <input type="hidden" name="${requestPath.action}" value="show"/>
+        <input type=submit class="btn btn-primary"
+               value="<fmt:message key="teacher_course_connection_jspf.btn.choose"/>" form="course"/>
+
+
+        <c:if test="${not empty requestScope.chosenCourse}">
+            <c:set var="courseNames" value="${requestScope.chosenCourse}"/>
+            <ul class="bs-example border">
+                <%@ include file="/WEB-INF/jspf/common/show_course.jspf" %>
+            </ul>
+        </c:if>
+    </form>
+</div>
+

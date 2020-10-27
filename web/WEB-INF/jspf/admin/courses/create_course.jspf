@@ -1,0 +1,62 @@
+<c:set var="title" value="Course create"/>
+
+<ul class="bs-example hr">
+    <div style="text-align: center;">
+        <h6 class="display-4"><fmt:message key="create_course_jsp.h6.page_name.course_create"/></h6>
+        <h5 align="left" style="color: red"><fmt:message key="create_course_jsp.h5.text.all_fields_required"/></h5>
+        <form action="/controller" method="post">
+            <li>
+                <td><input type="text" name="${requestPath.courseName}"
+                           placeholder="<fmt:message key="create_course_jsp.placeholder.name_eng"/>"></td>
+                <td><input type="text" name="${requestPath.courseNameRus}"
+                           placeholder="<fmt:message key="create_course_jsp.placeholder.name_rus"/>"></td>
+            <li>
+            <li>
+                <input type="hidden"/>
+                <fmt:message key="create_course_jsp.text.topic"/>
+                <select name="${requestPath.courseTopic}" style="margin: 3px">
+                    <c:forEach var="topic" items="${requestScope.topics}">
+                        <option value="${topic.get('id')}">${topic.get('name')}</option>
+                    </c:forEach>
+                </select>
+            </li>
+            <li>
+                <input type="hidden"/>
+                <fmt:message key="create_course_jsp.text.start_date"/>
+                <td><input type="date" name="${requestPath.startDate}"></td>
+            </li>
+            <li>
+                <input type="hidden"/>
+                <fmt:message key="create_course_jsp.text.end_date"/>
+                <td><input type="date" name="${requestPath.endDate}"></td>
+            </li>
+            <li>
+                <td><textarea class="text-area" type="text" name="${requestPath.description}"
+                              placeholder="<fmt:message key="create_course_jsp.placeholder.description_eng"/>"
+                              style="width: 300px; height:100px; font-size:14pt;"></textarea></td>
+                <td><textarea type="text" name="${requestPath.descriptionRus}"
+                              placeholder="<fmt:message key="create_course_jsp.placeholder.description_rus"/>"
+                              style="width: 300px; height:100px; font-size:14pt;"></textarea></td>
+            </li>
+            <li>
+                <fmt:message key="create_course_jsp.text.teacher"/>
+                <select name="${requestPath.courseTeacher}" style="margin: 3px">
+                    <c:forEach var="teacher" items="${requestScope.teachers}">
+                        <option value="${teacher.get('id')}">${teacher.get('fullName')}</option>
+                    </c:forEach>
+                </select>
+            </li>
+            <form>
+                <tr>
+                    <td colspan="2" align="left">
+                        <input type="hidden" name="${requestPath.command}" value="manageCourses"/>
+                        <input type="hidden" name="${requestPath.action}" value="create"/>
+                        <input type="submit" onclick="return confirmBox()"
+                               value="<fmt:message key="create_course_jsp.btn.create"/>" class="btn-primary">
+                    </td>
+                </tr>
+            </form>
+        </form>
+    </div>
+</ul>
+

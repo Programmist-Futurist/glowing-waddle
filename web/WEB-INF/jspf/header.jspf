@@ -1,0 +1,121 @@
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+    .bs-example {
+        margin: 20px;
+    }
+</style>
+
+<div class="bs-example">
+
+    <ul class="nav nav-tabs mt-5">
+        <%--===========================================================================
+                  This way we define the TEACHER MENU.
+                  ===========================================================================--%>
+        <c:if test="${sessionScope.user.get('class').equals(teacher.getClass().simpleName)}">
+            <li class="nav-item">
+                <a href="controller?${requestPath.command}=teacher" class="nav-link active"><fmt:message
+                        key="header_jspf.text.profile"/></a>
+            </li>
+            <li class="nav-item">
+                <a href="controller?${requestPath.command}=teacherJournalsCommand" class="nav-link"><fmt:message
+                        key="header_jspf.text.journals"/></a> &nbsp;
+            </li>
+        </c:if>
+
+        <%--===========================================================================
+        This way we define the STUDENT MENU.
+        ===========================================================================--%>
+        <c:if test="${sessionScope.user.get('class').equals(student.getClass().simpleName)}">
+            <li class="nav-item">
+                <a href="controller?${requestPath.command}=student" class="nav-link"><fmt:message
+                        key="header_jspf.text.profile"/></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><fmt:message
+                        key="header_jspf.text.courses"/></a>
+                <div class="dropdown-menu">
+                    <a href="controller?${requestPath.command}=filterCourses&${requestPath.courses}=myCourses"
+                       class="dropdown-item"><fmt:message key="header_jspf.text.my_courses"/></a>
+                    <a href="controller?${requestPath.command}=filterCourses&${requestPath.courses}=allCourses"
+                       class="dropdown-item"><fmt:message key="header_jspf.text.all_courses"/></a>
+                </div>
+            </li>
+        </c:if>
+
+        <%--===========================================================================
+        This way we define the ADMIN MENU.
+        ===========================================================================--%>
+        <c:if test="${sessionScope.user.get('roleId').equals('1')}">
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><fmt:message
+                        key="header_jspf.text.course_manage"/></a>
+                <div class="dropdown-menu">
+                    <a href="controller?${requestPath.command}=manageCourses&${requestPath.manageCourses}=1"
+                       class="dropdown-item"><fmt:message key="header_jspf.text.create_course"/></a>
+                    <a href="controller?${requestPath.command}=manageCourses&${requestPath.manageCourses}=2"
+                       class="dropdown-item"><fmt:message key="header_jspf.text.update_course"/></a>
+                    <a href="controller?${requestPath.command}=manageCourses&${requestPath.manageCourses}=3"
+                       class="dropdown-item"><fmt:message key="header_jspf.text.delete_course"/></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><fmt:message
+                        key="header_jspf.text.teacher_manage"/></a>
+                <div class="dropdown-menu">
+                    <a href="controller?${requestPath.command}=manageTeacher"
+                       class="dropdown-item"><fmt:message key="header_jspf.text.create_teacher"/></a>
+                    <a href="controller?${requestPath.command}=courseForTeacher"
+                       class="dropdown-item"><fmt:message key="header_jspf.text.teacher_for_course"/></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><fmt:message
+                        key="header_jspf.text.student_manage"/></a>
+                <div class="dropdown-menu">
+                    <a href="controller?${requestPath.command}=manageStudent"
+                       class="dropdown-item"><fmt:message key="header_jspf.text.block_unblock_student"/></a>
+                </div>
+            </li>
+
+        </c:if>
+
+        <%--===========================================================================
+   This way we define the STANDART user MENU.
+   ===========================================================================--%>
+
+        <c:if test="${sessionScope.user != null}">
+
+            <li class="nav-item dropdown ml-auto">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><fmt:message
+                        key="header_jspf.text.account"/></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <c:choose>
+                        <c:when test="${sessionScope.user.get('class').equals(teacher.getClass().simpleName)}">
+                            <a href="controller?${requestPath.command}=editTeacher" class="dropdown-item"><fmt:message
+                                    key="header_jspf.text.edit_info"/></a>
+                        </c:when>
+                        <c:when test="${sessionScope.user.get('class').equals(student.getClass().simpleName)}">
+                            <a href="controller?${requestPath.command}=editStudent" class="dropdown-item"><fmt:message
+                                    key="header_jspf.text.edit_info"/></a>
+                        </c:when>
+                    </c:choose>
+                    <a href="controller?${requestPath.command}=languageSettings" class="dropdown-item"><fmt:message
+                            key="header_jspf.text.language"/></a>
+                    <div class="dropdown-divider"></div>
+                    <a href="controller?${requestPath.command}=logout" class="dropdown-item"><fmt:message
+                            key="header_jspf.text.logout"/></a>
+                </div>
+            </li>
+        </c:if>
+    </ul>
+</div>

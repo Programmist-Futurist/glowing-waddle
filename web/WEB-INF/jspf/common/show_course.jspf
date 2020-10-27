@@ -1,0 +1,37 @@
+<div class="bs-example">
+    <h2 class="mb-3">${courseNames.get('name')}</h2>
+    <dl class="row">
+        <dt class="col-sm-3"><fmt:message key="show_course_jspf.dt.duration_in_month"/></dt>
+        <dd class="col-sm-9">${courseNames.get('durationInMonths')}</dd>
+        <dt class="col-sm-3 text-truncate"><fmt:message key="show_course_jspf.dt.start_date"/></dt>
+        <dd class="col-sm-9">${courseNames.get('startDate')}</dd>
+        <dt class="col-sm-3 text-truncate"><fmt:message key="show_course_jspf.dt.end_date"/></dt>
+        <dd class="col-sm-9">${courseNames.get('endDate')}</dd>
+        <dt class="col-sm-3"><fmt:message key="show_course_jspf.dt.teacher"/></dt>
+        <dd class="col-sm-9">${courseNames.get('teacherName')}</dd>
+        <dt class="col-sm-3"><fmt:message key="show_course_jspf.dt.description"/></dt>
+        <dd class="col-sm-9">${courseNames.get('description')}</dd>
+        <dt class="col-sm-3"><fmt:message key="show_course_jspf.dt.topic"/></dt>
+        <dd class="col-sm-9">${courseNames.get('topicName')}</dd>
+        <dt class="col-sm-3"><fmt:message key="show_course_jspf.dt.status"/></dt>
+        <dd class="col-sm-9">${courseNames.get('statusName')}</dd>
+        <dt class="col-sm-3"><fmt:message key="show_course_jspf.dt.amount_of_students"/></dt>
+        <dd class="col-sm-9">${courseNames.get('studentAmount')}</dd>
+
+        <c:if test="${sessionScope.user.get('class').equals(student.getClass().simpleName)}">
+            <dd class="col-sm-1">
+                <c:if test="${'false'.equals(courseNames.get('enrolled'))}">
+                    <a type="button" onclick="return confirmBox()"
+                       href="controller?${requestPath.command}=enrollCourse&${requestPath.courseId}=${courseNames.get('id')}&${requestPath.button}=enroll"
+                       class="btn btn-primary"><fmt:message key="show_course_jspf.btn.enroll"/></a>
+                </c:if>
+                <c:if test="${'true'.equals(courseNames.get('enrolled'))}">
+                    <a type="button" onclick="return confirmBox()"
+                       href="controller?command=enrollCourse&courseId=${courseNames.get('id')}&button=leave"
+                       class="btn btn-warning"><fmt:message key="show_course_jspf.btn.leave"/></a>
+                </c:if>
+            </dd>
+        </c:if>
+    </dl>
+    <hr/>
+</div>

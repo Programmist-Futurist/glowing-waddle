@@ -1,0 +1,94 @@
+<c:set var="title" value="Course edit"/>
+
+<div align="center">
+    <form action="/controller">
+        <p><fmt:message key="update_course_jsp.text.choose_course"/></p>
+        <select name="${requestPath.courseId}">
+            <c:forEach var="course" items="${requestScope.courses}">
+                <option value="${course.get('id')}">${course.get('name')}</option>
+            </c:forEach>
+        </select>
+        <input type="hidden" name="${requestPath.command}" value="manageCourses"/>
+        <input type="hidden" name="${requestPath.action}" value="show"/>
+        <input type="submit" class="btn btn-primary"
+               value="<fmt:message key="update_course_jsp.btn.open_editor"/>"/>
+    </form>
+</div>
+
+<c:if test="${not empty requestScope.course}">
+    <c:set var="course" value="${requestScope.course}"/>
+    <ul class="bs-example hr">
+        <div style="text-align: center;">
+            <h6 class="display-4"><fmt:message key="update_course_jsp.h6.page_name.teacher_for_course"/></h6>
+            <br/>
+            <form action="/controller" method="post">
+                <div class="bs-example">
+                    <h2 class="mb-3" style="color: blue">${course.get('name')}</h2>
+                    <dt class="row">
+                    <dt class="col-sm-12"><fmt:message key="update_course_jsp.text.course_name"/></dt>
+                    <dd class="col-sm-12">
+                        <td><textarea class="text-area" type="text" name="${requestPath.courseName}"
+                        >${course.get('nameEng')}</textarea>
+                        </td>
+                        <td><textarea class="text-area" type="text" name="${requestPath.courseNameRus}"
+                        >${course.get('nameRus')}</textarea>
+                        </td>
+                    </dd>
+
+                    <dt class="col-sm-12">
+                        <fmt:message key="update_course_jsp.text.topic"/> ${course.get('topicName')}</dt>
+                    <dd class="col-sm-12">
+                        <select name="${requestPath.courseTopic}" style="margin: 3px;">
+                            <c:forEach var="topic" items="${requestScope.topics}">
+                                <option value="${topic.get('id')}">${topic.get('name')}</option>
+                            </c:forEach>
+                        </select>
+                    </dd>
+
+                    <dt class="col-sm-12"><fmt:message
+                            key="update_course_jsp.text.start_date"/> ${course.get('startDate')}</dt>
+                    <dd class="col-sm-12">
+                        <td><input type="date" name="${requestPath.startDate}"></td>
+                    </dd>
+                    <br/>
+
+                    <dt class="col-sm-12"><fmt:message
+                            key="update_course_jsp.text.end_date"/> ${course.get('endDate')}</dt>
+                    <dd class="col-sm-12">
+                        <td><input type="date" name="${requestPath.endDate}"></td>
+                    </dd>
+                    <dt class="col-sm-12"><fmt:message key="update_course_jsp.text.description"/></dt>
+                    <dd class="col-sm-12">
+                        <td><textarea class="text-area" type="text" name="${requestPath.description}"
+                                      style="width: 300px; height:100px;"
+                        >${course.get('descriptionEng')}</textarea>
+                        </td>
+                        <td><textarea class="text-area" type="text" name="${requestPath.descriptionRus}"
+                                      style="width: 300px; height:100px;"
+                        >${course.get('descriptionRus')}</textarea></td>
+                    </dd>
+                    <dt class="col-sm-12">
+                        <fmt:message key="update_course_jsp.text.teacher"/> ${course.get('teacherName')}</dt>
+                    <dd class="col-sm-12">
+                        <select name="${requestPath.courseTeacher}" style="margin: 3px;">
+                            <c:forEach var="teacher" items="${requestScope.teachers}">
+                                <option value="${teacher.get('id')}">${teacher.get('fullName')}</option>
+                            </c:forEach>
+                        </select>
+                    </dd>
+                    <dd class="col-sm-12">
+                        <tr>
+                            <td colspan="2" align="left">
+                                <input type="hidden" name="${requestPath.command}" value="manageCourses"/>
+                                <input type="hidden" name="${requestPath.action}" value="update"/>
+                                <input type="hidden" name="${requestPath.courseId}" value="${course.get('id')}"/>
+                                <input type="submit" name onclick="return confirmBox()" class="btn-primary"
+                                       value="<fmt:message key="update_course_jsp.btn.update"/>"/>
+                            </td>
+                        </tr>
+                    </dd>
+                </div>
+            </form>
+        </div>
+    </ul>
+</c:if>

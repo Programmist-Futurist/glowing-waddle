@@ -1,0 +1,41 @@
+<div class="text-input">
+    <p><fmt:message key="settings_student_jsp.text.login"/></p>
+    <input type="text" name="${requestPath.oldLogin}"
+           placeholder="<fmt:message key="settings_student_jsp.placeholder.old_login"/>"/>
+    <input type="text" name="${requestPath.login}"
+           placeholder="<fmt:message key="settings_student_jsp.placeholder.new_login"/>"/>
+    <hr/>
+
+    <p><fmt:message key="settings_student_jsp.text.password"/></p>
+    <input type="text" name="${requestPath.oldPassword}"
+           placeholder="<fmt:message key="settings_student_jsp.placeholder.old_password"/>"/>
+    <input type="text" name="${requestPath.password}"
+           placeholder="<fmt:message key="settings_student_jsp.placeholder.new_password"/>"/>
+    <hr/>
+
+    <p><fmt:message key="settings_student_jsp.text.first_name"/></p>
+    <textarea type="text"
+              name="${requestPath.firstName}">${sessionScope.user.get('firstName')}</textarea>
+    <hr/>
+
+    <p><fmt:message key="settings_student_jsp.text.last_name"/></p>
+    <textarea type="text" name="${requestPath.lastName}">${sessionScope.user.get('lastName')}</textarea>
+    <hr/>
+
+    <p><fmt:message key="settings_student_jsp.text.patronymic"/></p>
+    <textarea type="text" name="${requestPath.patronymic}">${sessionScope.user.get('patronymic')}</textarea>
+    <hr/>
+
+    <p><fmt:message key="settings_student_jsp.text.email"/></p>
+    <textarea type="text" name="${requestPath.email}">${sessionScope.user.get('email')}</textarea>
+    <hr/>
+
+    <p><fmt:message key="settings_student_jsp.text.phone"/></p>
+    <textarea type="text" name="${requestPath.phone}">${sessionScope.user.get('phone')}</textarea>
+    <hr/>
+
+    <div class="window-button">
+        <input type="hidden" name="${requestPath.action}" value="edit"/>
+        <input type="submit" value="<fmt:message key="settings_student_jsp.btn.edit"/>" class="btn-primary"><br/>
+    </div>
+</div>

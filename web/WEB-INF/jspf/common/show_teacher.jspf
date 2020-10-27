@@ -1,0 +1,13 @@
+<h6><fmt:message
+        key="show_teacher_jspf.h6.teacher_name"/> ${teacherNames.get('lastName')} ${teacherNames.get('firstName')} ${teacherNames.get('patronymic')}</h6>
+
+<c:if test="${teacherNames.get('experience') != null && not empty teacherNames.get('experience')}">
+    <h6><fmt:message key="show_teacher_jspf.h6.teacher_experience"/> ${teacherNames.get('experience')}</h6>
+</c:if>
+<c:if test="${teacherNames.get('phone') != null && not empty teacherNames.get('phone')}">
+    <h6><fmt:message key="show_teacher_jspf.h6.teacher_phone"/> ${teacherNames.get('phone')}</h6>
+</c:if>
+<c:if test="${teacherNames.get('email') != null && not empty teacherNames.get('email')}">
+    <h6><fmt:message key="show_teacher_jspf.h6.teacher_email"/> ${teacherNames.get('email')}</h6>
+</c:if>
+

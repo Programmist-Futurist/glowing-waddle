@@ -1,0 +1,30 @@
+<c:set var="title" value="Course delete"/>
+<div align="center">
+    <h6 class="display-4"><fmt:message key="delete_course_jsp.h6.page_name.course_delete"/></h6>
+    <form>
+        <br/>
+        <fmt:message key="delete_course_jsp.form_text.course"/>
+        <select name="${requestPath.courseId}">
+            <c:forEach var="course" items="${requestScope.courses}">
+                <option value="${course.get('id')}">${course.get('name')}</option>
+            </c:forEach>
+        </select>
+
+        <input type="hidden" name="${requestPath.command}" value="manageCourses"/>
+        <input type="hidden" name="${requestPath.action}" value="show"/>
+        <input type="submit" class="btn btn-primary" value="<fmt:message key="delete_course_jsp.btn.show"/>"/>
+    </form>
+</div>
+
+
+<c:if test="${not empty requestScope.course}">
+    <c:set var="courseNames" value="${requestScope.course}"/>
+    <%@ include file="/WEB-INF/jspf/common/show_course.jspf" %>
+    <div align="center">
+        <form action="/controller">
+            <input type="hidden" name="${requestPath.command}" value="manageCourses"/>
+            <input type="hidden" name="${requestPath.action}" value="delete"/>
+            <input type="submit" class="btn btn-warning" value="<fmt:message key="delete_course_jsp.btn.delete"/>"/>
+        </form>
+    </div>
+</c:if>

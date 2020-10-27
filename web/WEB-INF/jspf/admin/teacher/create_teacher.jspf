@@ -1,0 +1,84 @@
+<c:set var="title" value="Teacher register"/>
+
+<form action="/controller" method="post">
+    <input type="hidden" name="${requestPath.command}" value="manageTeacher"/>
+
+    <ul class="bs-example hr">
+        <div style="text-align: center;">
+            <h6 class="display-4"><fmt:message key="create_teacher_jsp.h6.page_name"/></h6>
+            <h5 align="left" style="color: red"><fmt:message key="create_teacher_jsp.h5.necessary_fields"/></h5>
+            <form action="/controller" method="post">
+                <li>
+                    <td><input type="text" name="${requestPath.login}"
+                               placeholder="<fmt:message key="create_teacher_jsp.placeholder.login"/>"></td>
+                </li>
+                <li>
+                    <td><input type="password" name="${requestPath.password}"
+                               placeholder="<fmt:message key="create_teacher_jsp.placeholder.password"/>"></td>
+                </li>
+                <li>
+                    <form action="/controller">
+                        <td> Role id: <select name="${requestPath.roleId}">
+                            <c:forEach var="entity" items="${requestScope.roles}">
+                                <option value="${entity.get('id')}">${entity.get('name')}</option>
+                            </c:forEach>
+                        </select></td>
+                    </form>
+                </li>
+                <li class="input-group">
+                    <b><fmt:message key="create_teacher_jsp.text.eng_variant"/></b>
+                    <input type="text" name="${requestPath.firstName}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.name_eng"/>">
+                    <input type="text" name="${requestPath.lastName}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.surname_eng"/>">
+                    <input type="text" name="${requestPath.patronymic}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.patronymic_eng"/>">
+                    <input type="text" name="${requestPath.experience}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.experience_eng"/>">
+                </li>
+                <li class="input-group">
+                    <b><fmt:message key="create_teacher_jsp.text.rus_variant"/></b>
+                    <input type="text" name="${requestPath.firstNameRus}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.name_rus"/>">
+                    <input type="text" name="${requestPath.lastNameRus}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.surname_rus"/>">
+                    <input type="text" name="${requestPath.patronymicRus}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.patronymic_rus"/>">
+                    <input type="text" name="${requestPath.experienceRus}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.experience_rus"/>">
+                </li>
+                <br/>
+
+                <li>
+                    <h5 align="left"><fmt:message key="create_teacher_jsp.h5.additional_fields"/></h5>
+                    <input type="text" name="${requestPath.email}"
+                           placeholder="<fmt:message key="create_teacher_jsp.placeholder.email"/>">
+                </li>
+                <li>
+                    <td><input type="text" name="${requestPath.phone}"
+                               placeholder="<fmt:message key="create_teacher_jsp.placeholder.phone"/>"></td>
+                </li>
+                <li>
+                    <form action="/controller">
+                        <fmt:message key="create_teacher_jsp.text.choose_course"/>
+                        <select name="${requestPath.courseId}">
+                            <option value=""><fmt:message key="create_teacher_jsp.text_select.not_chosen"/></option>
+                            <c:forEach var="course" items="${requestScope.courses}">
+                                <option value="${course.get('id')}">${course.get('name')}</option>
+                            </c:forEach>
+                        </select>
+                    </form>
+                </li>
+
+                <tr>
+                    <td colspan="2" align="left">
+                        <input type="hidden" name="${requestPath.action}" value="signUp"/>
+                        <input type="submit" onclick="return confirmBox()"
+                               value="<fmt:message key="create_teacher_jsp.btn.sign_up"/>" class="btn-primary">
+                    </td>
+                </tr>
+            </form>
+        </div>
+    </ul>
+</form>
+
